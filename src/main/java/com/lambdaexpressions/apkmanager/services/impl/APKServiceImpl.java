@@ -66,7 +66,7 @@ public class APKServiceImpl implements APKService {
     }
   }
 
-  private String getFilePath(String appName, String version){
+  private String getFilePath(String appName, String version) {
     return String.format("%s%s%s%s%s%s%s%s", this.baseLocation, File.separator, appName, File.separator, version, File.separator, appName, fileExtension);
   }
 

@@ -1,12 +1,10 @@
 package com.lambdaexpressions.apkmanager.services;
 
 import com.lambdaexpressions.apkmanager.exceptions.NotFoundException;
-import com.lambdaexpressions.apkmanager.exceptions.PackageException;
 import com.lambdaexpressions.apkmanager.exceptions.ReadFileException;
 import com.lambdaexpressions.apkmanager.exceptions.WriteFileException;
 import com.lambdaexpressions.apkmanager.v1.model.APKMessageDTO;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**

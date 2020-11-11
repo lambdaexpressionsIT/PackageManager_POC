@@ -1,9 +1,9 @@
 package com.lambdaexpressions.apkmanager.v1.controllers;
 
 import com.lambdaexpressions.apkmanager.exceptions.MissingDataException;
+import com.lambdaexpressions.apkmanager.exceptions.NotFoundException;
 import com.lambdaexpressions.apkmanager.exceptions.PackageException;
 import com.lambdaexpressions.apkmanager.helpers.TestHelper;
-import com.lambdaexpressions.apkmanager.exceptions.NotFoundException;
 import com.lambdaexpressions.apkmanager.services.APKService;
 import com.lambdaexpressions.apkmanager.v1.RESTExceptionHandler;
 import com.lambdaexpressions.apkmanager.v1.model.APKMessageDTO;
@@ -50,8 +50,8 @@ class APKControllerTest {
   @BeforeEach
   public void setUp() {
     mockMvc = MockMvcBuilders.standaloneSetup(apkController)
-              .setControllerAdvice(new RESTExceptionHandler())
-              .build();
+        .setControllerAdvice(new RESTExceptionHandler())
+        .build();
   }
 
   @Test
@@ -72,24 +72,24 @@ class APKControllerTest {
   public void testAppNamePathDownloadAPK() throws Exception {
     //given
     APKMessageDTO apkMessage = APKMessageDTO.builder()
-                                .apkFile(DUMMY_APK)
-                                .version(DUMMY_APP_VERSION).build();
+        .apkFile(DUMMY_APK)
+        .version(DUMMY_APP_VERSION).build();
     //when
 
     //then
     mockMvc.perform(post(String.format("/api/v1/downloadApk/%s", DUMMY_APP_NAME))
-            .contentType(MediaType.APPLICATION_JSON)
-            .content(TestHelper.asJsonString(apkMessage)))
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(TestHelper.asJsonString(apkMessage)))
         .andExpect(status().isCreated());
   }
 
   @Test
-  public void testVoidPathDownloadAPK() throws Exception{
+  public void testVoidPathDownloadAPK() throws Exception {
     //given
     APKMessageDTO apkMessage = APKMessageDTO.builder()
-                                .version(DUMMY_APP_VERSION)
-                                .apkFile(DUMMY_APK)
-                                .name(DUMMY_APP_NAME).build();
+        .version(DUMMY_APP_VERSION)
+        .apkFile(DUMMY_APK)
+        .name(DUMMY_APP_NAME).build();
 
     //when
 
@@ -101,7 +101,7 @@ class APKControllerTest {
   }
 
   @Test
-  public void testGetAPK() throws Exception{
+  public void testGetAPK() throws Exception {
     //given
     APKMessageDTO apkMessage = APKMessageDTO.builder()
         .version(DUMMY_APP_VERSION)
@@ -129,7 +129,7 @@ class APKControllerTest {
     //then
     mockMvc.perform(get(String.format("/api/v1/getApk/%s/%s", DUMMY_APP_NAME, DUMMY_APP_VERSION)))
         .andExpect(status().isNotFound())
-        .andExpect(result-> assertTrue(result.getResolvedException() instanceof NotFoundException));
+        .andExpect(result -> assertTrue(result.getResolvedException() instanceof NotFoundException));
   }
 
   @Test
@@ -138,14 +138,13 @@ class APKControllerTest {
     APKMessageDTO apkMessage = APKMessageDTO.builder().apkFile(DUMMY_APK).build();
 
     //when
-    //when(apkService.getAPKMessageByAppNameAndVersion(anyString(), anyString())).thenThrow(NotFoundException.class);
 
     //then
     mockMvc.perform(post("/api/v1/downloadApk")
         .contentType(MediaType.APPLICATION_JSON)
         .content(TestHelper.asJsonString(apkMessage)))
         .andExpect(status().isBadRequest())
-        .andExpect(result->assertTrue(result.getResolvedException() instanceof MissingDataException))
+        .andExpect(result -> assertTrue(result.getResolvedException() instanceof MissingDataException))
         .andExpect(result -> assertTrue((result.getResolvedException().getMessage().equals(PackageException.MISSING_APP_NAME_ERROR_MESSAGE))));
   }
 
@@ -157,14 +156,13 @@ class APKControllerTest {
         .name(DUMMY_APP_NAME).build();
 
     //when
-    //when(apkService.getAPKMessageByAppNameAndVersion(anyString(), anyString())).thenThrow(NotFoundException.class);
 
     //then
     mockMvc.perform(post("/api/v1/downloadApk")
         .contentType(MediaType.APPLICATION_JSON)
         .content(TestHelper.asJsonString(apkMessage)))
         .andExpect(status().isBadRequest())
-        .andExpect(result->assertTrue(result.getResolvedException() instanceof MissingDataException))
+        .andExpect(result -> assertTrue(result.getResolvedException() instanceof MissingDataException))
         .andExpect(result -> assertTrue((result.getResolvedException().getMessage().equals(PackageException.MISSING_VERSION_NUMBER_ERROR_MESSAGE))));
   }
 

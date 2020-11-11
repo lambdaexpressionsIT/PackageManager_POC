@@ -33,7 +33,6 @@ public class Bootstrap implements CommandLineRunner {
 
   @Override
   public void run(String... args) {
-    log.debug("Running bootstrap");
     Map<String, Map<String, Boolean>> packagesMap = new HashMap<>();
     File baseDir = new File(baseLocation);
 
@@ -41,7 +40,6 @@ public class Bootstrap implements CommandLineRunner {
         .forEach(dirArray -> Stream.of(dirArray).forEach(appName -> {
           final String appNameDirPath = baseLocation + File.separator + appName;
           File appNameDir = new File(appNameDirPath);
-          log.debug("appNameDirPath:" + appNameDirPath);
           if (!packagesMap.containsKey(appName)) {
             packagesMap.put(appName, new HashMap<>());
           }
@@ -51,7 +49,6 @@ public class Bootstrap implements CommandLineRunner {
               .forEach(appNameDirArray -> Stream.of(appNameDirArray).forEach(versionNumber -> {
                 final String versionNumberDirPath = appNameDirPath + File.separator + versionNumber;
                 File versionNumberDir = new File(versionNumberDirPath);
-                log.debug("versionNumberDirPath:"+versionNumberDirPath);
                 if (!currentAppMap.containsKey(versionNumber)) {
                   currentAppMap.put(versionNumber, Boolean.FALSE);
                 }
@@ -59,9 +56,7 @@ public class Bootstrap implements CommandLineRunner {
                 Stream.ofNullable(versionNumberDir.list((currentVersionNumberDir, currentVersionNumber) -> new File(currentVersionNumberDir, currentVersionNumber).isFile()))
                     .forEach(filesArray -> Stream.of(filesArray).forEach(fileName -> {
                       if (fileName.equalsIgnoreCase(appName + fileExtension)) {
-                        log.debug("found package. fileName:"+fileName);
                         currentAppMap.put(versionNumber, Boolean.TRUE);
-                        log.debug("Found APK:" + appName + versionNumber);
                       }
                     }));
               }));
