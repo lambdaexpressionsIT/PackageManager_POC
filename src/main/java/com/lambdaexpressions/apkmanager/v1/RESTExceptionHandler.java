@@ -19,7 +19,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class RESTExceptionHandler extends ResponseEntityExceptionHandler {
 
   @ExceptionHandler(NotFoundException.class)
-  public ResponseEntity<Object> handleNotFoundException(NotFoundException e, WebRequest webRequest){
+  public ResponseEntity<Object> handleNotFoundException(NotFoundException e, WebRequest webRequest) {
     return this.createExceptionResponse(e, HttpStatus.NOT_FOUND);
   }
 
@@ -33,7 +33,7 @@ public class RESTExceptionHandler extends ResponseEntityExceptionHandler {
     return this.createExceptionResponse(e, HttpStatus.BAD_REQUEST);
   }
 
-  private ResponseEntity<Object> createExceptionResponse(PackageException e, HttpStatus status){
+  private ResponseEntity<Object> createExceptionResponse(PackageException e, HttpStatus status) {
     ErrorDTO errorDTO = ErrorDTO.builder().appName(e.getAppName()).version(e.getVersion()).errorMessage(e.getMessage()).build();
     return new ResponseEntity<Object>(errorDTO, new HttpHeaders(), status);
   }

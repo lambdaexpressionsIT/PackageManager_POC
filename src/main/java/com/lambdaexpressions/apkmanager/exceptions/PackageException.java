@@ -8,7 +8,7 @@ import lombok.Getter;
  * at 11:22 PM
  */
 @Getter
-public class PackageException extends Exception{
+public class PackageException extends Exception {
 
   public static final String NOT_FOUND_ERROR_MESSAGE = "Package not installed";
   public static final String IO_READ_ERROR_MESSAGE = "Unreadable package file";

@@ -23,7 +23,7 @@ public class APKController {
   }
 
   @ResponseStatus(HttpStatus.CREATED)
-  @PostMapping ("downloadApk/{appName}/{version}")
+  @PostMapping("downloadApk/{appName}/{version}")
   public void installPackageIF(@PathVariable String appName, @PathVariable String version, @RequestBody APKMessageDTO apkMessageDTO) throws WriteFileException {
     apkMessageDTO.setName(appName);
     apkMessageDTO.setVersion(version);
@@ -31,10 +31,10 @@ public class APKController {
   }
 
   @ResponseStatus(HttpStatus.CREATED)
-  @PostMapping ("downloadApk/{appName}")
+  @PostMapping("downloadApk/{appName}")
   public void installPackageIF(@PathVariable String appName, @RequestBody APKMessageDTO apkMessageDTO) throws WriteFileException, MissingDataException {
 
-    if(StringUtils.isBlank(apkMessageDTO.getVersion())){
+    if (StringUtils.isBlank(apkMessageDTO.getVersion())) {
       throw new MissingDataException(PackageException.MISSING_VERSION_NUMBER_ERROR_MESSAGE, appName, apkMessageDTO.getVersion());
     }
 
@@ -43,11 +43,11 @@ public class APKController {
   }
 
   @ResponseStatus(HttpStatus.CREATED)
-  @PostMapping ("downloadApk")
-  public void installPackageIF( @RequestBody APKMessageDTO apkMessageDTO) throws WriteFileException, MissingDataException {
-    if(StringUtils.isBlank(apkMessageDTO.getName())){
+  @PostMapping("downloadApk")
+  public void installPackageIF(@RequestBody APKMessageDTO apkMessageDTO) throws WriteFileException, MissingDataException {
+    if (StringUtils.isBlank(apkMessageDTO.getName())) {
       throw new MissingDataException(PackageException.MISSING_APP_NAME_ERROR_MESSAGE, apkMessageDTO.getName(), apkMessageDTO.getVersion());
-    } else if(StringUtils.isBlank(apkMessageDTO.getVersion())){
+    } else if (StringUtils.isBlank(apkMessageDTO.getVersion())) {
       throw new MissingDataException(PackageException.MISSING_VERSION_NUMBER_ERROR_MESSAGE, apkMessageDTO.getName(), apkMessageDTO.getVersion());
     }
 
