@@ -15,7 +15,7 @@
     <description>Handles installation of APK on android device</description>
 
     <properties>
-        <java.version>14</java.version>
+        <java.version>9</java.version>
     </properties>
 
     <dependencies>
@@ -61,8 +61,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>14</source>
-                    <target>14</target>
+                    <source>9</source>
+                    <target>9</target>
+		    <meminitial>1024m</meminitial>
+		    <maxmem>2048m</maxmem>
                 </configuration>
             </plugin>
         </plugins>
