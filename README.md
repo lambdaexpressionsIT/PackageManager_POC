@@ -4,6 +4,24 @@
 
 RESTful interface to locally store apk packages sent via HTTP POST and send them when requested via HTTP GET.
 
+## USE JAVA 9
+
+
+## How to compile the code from the command line using maven
+```sh
+mvn clean install
+```
+
+### How to run the PackageManager from the command line using maven
+```sh
+mvn spring-boot:run
+```
+
+## Folder
+
+All the files will be saved into the file system.
+Change this resource file to change the path:  /src/main/resources/application.properties 
+
 
 ## POST example
 http://someserver.com/api/v1/downloadApk/com.some.app/1
